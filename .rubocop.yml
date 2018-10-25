@@ -1,0 +1,21 @@
+AllCops:
+  Exclude:
+    - Guardfile
+    - db/**/*
+    - lib/**/*
+    - script/**/*
+    - vendor/**/*
+    - bin/**/*
+Documentation:
+  Enabled: false
+Lint/Debugger:
+  AutoCorrect: false
+LineLength:
+  Max: 120
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+    - app/views/**/*
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact

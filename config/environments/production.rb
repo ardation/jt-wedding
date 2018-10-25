@@ -13,6 +13,8 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
+  config.session_store :cache_store, key: ENV['APP_SESSION_KEY']
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).

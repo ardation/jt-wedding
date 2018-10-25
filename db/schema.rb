@@ -10,9 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2018_10_25_042421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "invite_people", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.boolean "primary", default: false
+    t.boolean "coming"
+    t.string "gender"
+    t.boolean "child", default: false
+    t.bigint "invite_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invite_id"], name: "index_invite_people_on_invite_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.boolean "reception", default: false
+    t.boolean "ask_food", default: true
+    t.string "code", null: false
+    t.string "food_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "invite_people", "invites", on_delete: :cascade
 end
