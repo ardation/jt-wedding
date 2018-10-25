@@ -1,0 +1,14 @@
+<%= simple_form_for @invite, url: invite_path do |f| %>
+  <% if @invite.reception? %>
+    You are invited to the reception
+  <% end %>
+  <% if @invite.ask_food? %>
+    <%= f.input :food_type, as: :radio_buttons, collection: Invite.food_types %>
+  <% end %>
+  <%= f.simple_fields_for :people do |p| %>
+    <%= p.object.first_name %>
+    <%= p.object.last_name %>
+    <%= p.input :coming, as: :radio_buttons %>
+  <% end %>
+  <%= f.submit %>
+<% end %>

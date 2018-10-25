@@ -14,10 +14,16 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'simple_form'
 gem 'redis', '~> 4.0'
+gem 'bootstrap', '~> 4.1.3'
+gem 'draper'
 
 group :development, :test do
-  gem 'rubocop'
+  gem 'factory_bot_rails'
+  gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'pry-rescue'
+  gem 'rspec-rails'
+  gem 'rubocop'
 end
 
 group :development do

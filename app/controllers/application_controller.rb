@@ -1,19 +1,19 @@
 class ApplicationController < ActionController::Base
   class InviteNotFoundError < StandardError; end
-  attr_accessor :invite
+  decorates_assigned :invite
   before_action :load_invite!
-  rescue_from InviteNotFoundError, with: :invite_not_found
+  rescue_from InviteNotFoundError, with: :redirect_to_new_invite_path
 
   def index; end
 
   protected
 
   def load_invite!
-    @invite = Invite.find_by(id: session[:invite_id]) unless session[:invite_id]
+    @invite = Invite.find_by(id: session[:invite_id]) if session[:invite_id]
     raise InviteNotFoundError unless @invite
   end
 
-  def invite_not_found
+  def redirect_to_new_invite_path
     redirect_to new_invite_path
   end
 end

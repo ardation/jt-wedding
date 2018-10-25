@@ -1,5 +1,5 @@
 class InvitesController < ApplicationController
-  skip_before_action :load_invite!, on: %i[new create]
+  skip_before_action :load_invite!, only: %i[new create]
 
   def new; end
 
@@ -9,10 +9,36 @@ class InvitesController < ApplicationController
     render 'new'
   end
 
+  def edit; end
+
+  def update
+    build_invite
+    return redirect_to root_path if save_invite
+    render 'edit'
+  end
+
+  def destroy
+    reset_session
+    redirect_to root_path
+  end
+
   protected
 
   def load_invite
     @invite = Invite.find_by(code: params[:invite][:code].upcase)
     session[:invite_id] = @invite&.id
+  end
+
+  def build_invite
+    @invite.attributes = invite_params
+  end
+
+  def save_invite
+    @invite.save
+  end
+
+  def invite_params
+    return {} unless params[:invite]
+    params.require(:invite).permit(:food_type, people_attributes: %i[id coming])
   end
 end
