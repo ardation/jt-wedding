@@ -8,7 +8,21 @@ $theme-colors: (
 @import "fontawesome/solid";
 @import "bootstrap";
 
+body, html {
+  height: 100%;
+  font-family: antique-olive, sans-serif;
+  font-style: normal;
+}
+h1, h2, h3, h4, h5 {
+  font-family: parkside, cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .card {
+  .card-title {
+    font-family: antique-olive, sans-serif;
+  }
   .card-img-icon {
     display: flex;
     align-items: center;
@@ -17,10 +31,8 @@ $theme-colors: (
     background-color: #777777;
     color: #fff;
     font-size: 50px;
+
   }
-}
-body, html {
-  height: 100%;
 }
 .primary {
   background-image: image-url('background-1.jpg');
@@ -28,23 +40,47 @@ body, html {
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 70px;
   color: #fff;
-  .content {
-    margin: auto;
-    text-align: center;
+  text-align: center;
+  &.background-2 {
+    background-image: image-url('background-2.jpg');
+    background-position: top center;
+  }
+  .overlay {
+    height: 100%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 70px;
+    background: rgba(0,0,0,0.25);
+    .messages {
+      text-align: left;
+    }
+    .content {
+      margin: auto;
+    }
+    .footer {
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+    }
   }
 }
 .navbar {
   border-radius: 5px;
+  height: 56px;
   &.bg-dark {
     background-color: #3C5074 !important;
   }
 }
-.margin-navbar-top {
-  margin-top: 70px;
+.padding-navbar-top {
+  padding-top: 70px;
+}
+#invite_code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 100px;
+  height: 120px;
+  width: 330px;
 }

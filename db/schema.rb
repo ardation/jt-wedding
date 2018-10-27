@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_25_042421) do
+ActiveRecord::Schema.define(version: 2018_10_27_030312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_042421) do
     t.string "food_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "rsvp", default: false
   end
 
   add_foreign_key "invite_people", "invites", on_delete: :cascade

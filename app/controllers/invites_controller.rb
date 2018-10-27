@@ -6,6 +6,8 @@ class InvitesController < ApplicationController
   def create
     load_invite
     return redirect_to root_path if @invite
+
+    flash[:error] = 'Hmm. That code is not quite right. Try again!'
     render 'new'
   end
 
@@ -13,13 +15,16 @@ class InvitesController < ApplicationController
 
   def update
     build_invite
-    return redirect_to root_path if save_invite
-    render 'edit'
+    return render 'edit' unless save_invite
+
+    flash[:success] = 'Woohoo! We have received your RSVP.'
+    redirect_to root_path
   end
 
   def destroy
     reset_session
     redirect_to root_path
+    flash[:success] = 'Thanks for visiting! Hopefully we will see you soon.'
   end
 
   protected
@@ -30,7 +35,7 @@ class InvitesController < ApplicationController
   end
 
   def build_invite
-    @invite.attributes = invite_params
+    @invite.attributes = invite_params.merge(rsvp: true)
   end
 
   def save_invite

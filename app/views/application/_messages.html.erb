@@ -1,0 +1,7 @@
+<div class="messages">
+<% flash.each do |key, value| %>
+  <div class="<%= flash_class(key) %> mb-2">
+    <%= value %>
+  </div>
+<% end %>
+</div>

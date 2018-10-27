@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>The Wedding of Jeanny &amp; Tataihono</title>
+    <title>Jeanny &amp; Tataihono's Wedding</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.typekit.net/oin4qzv.css">
   </head>
   <body>
     <%= render 'navigation' %>
     <%= yield :heading %>
-    <div class="container <%= content_for?(:heading) ? 'mt-2' : 'margin-navbar-top' %>">
+    <div class="container <%= content_for?(:heading) ? 'mt-2' : 'padding-navbar-top' %>">
+      <% unless content_for?(:heading) %>
+      <%= render 'messages' %>
+      <% end %>
       <%= yield %>
+      <% unless content_for?(:footer) %>
+        <hr>
+        <footer class="text-center text-muted mb-3 small">
+          Jeanny &amp; Tataihono's Wedding<br>
+          11th of May, 2019
+        </footer>
+      <% end %>
     </div>
+    <%= yield :footer %>
   </body>
 </html>

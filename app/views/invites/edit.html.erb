@@ -23,5 +23,5 @@
   <% if @invite.ask_food? %>
     <%= f.input :food_type, as: :radio_buttons, collection: Invite.food_types %>
   <% end %>
-  <%= f.submit class: 'btn btn-primary', value: 'Save RSVP' %>
+  <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send RSVP' %>
 <% end %>

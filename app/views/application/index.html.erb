@@ -1,12 +1,18 @@
 <% content_for :heading do %>
 <div class="primary">
-  <div class="content">
-    <h1 class="display-4">Welcome <%= invite.name %>.</h1>
-    <p class="lead">Join us on 11 May 2019 as we get married!</p>
-    <%= link_to 'RSVP', edit_invite_path, class: 'btn btn-primary btn-lg' %>
-  </div>
-  <div class="footer">
-    <h1 class="display-4"><i class="fal fa-chevron-double-down"></i></h1>
+  <div class="overlay">
+    <div class="container">
+      <%= render 'messages' %>
+    </div>
+    <div class="content">
+      <h1 class="display-2 mb-0">Welcome <%= invite.name %>! </h1>
+      <h1 class="display-4">We are excited to invite you to our wedding.</h1>
+      <p class="lead">Join us on 11 May 2019 as we get married!</p>
+      <%= link_to invite.rsvp? ? 'Update RSVP' : 'Send My RSVP', edit_invite_path, class: "btn #{invite.rsvp? ? 'btn-secondary' : 'btn-light'} btn-lg" %>
+    </div>
+    <div class="footer">
+      Invite &nbsp; <span class="display-4"><i class="fal fa-chevron-double-down"></i></span> &nbsp; Details
+    </div>
   </div>
 </div>
 <% end %>
