@@ -1,0 +1,37 @@
+<div class="card-group mb-2">
+  <div class="card">
+    <div class="card-img-top card-img-icon">
+      <i class="fal fa-church"></i>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Ceremony</h5>
+      <p class="card-text">
+      Auckland Baptist Tablernacle @ 11am
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-img-top card-img-icon">
+      <i class="fal fa-apple-crate"></i>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Afternoon Tea</h5>
+      <p class="card-text">
+      Auckland Baptist Tablernacle @ 1pm
+      </p>
+    </div>
+  </div>
+  <% if invite.reception? %>
+  <div class="card">
+    <div class="card-img-top card-img-icon">
+      <i class="fal fa-utensils"></i>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Reception</h5>
+      <p class="card-text">
+      Alexander Park @ 6pm
+      </p>
+    </div>
+  </div>
+  <% end %>
+</div>

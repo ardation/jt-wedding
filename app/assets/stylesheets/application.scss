@@ -1,0 +1,50 @@
+$theme-colors: (
+  "primary": #3C5074
+);
+
+@import "fontawesome/fontawesome";
+@import "fontawesome/light";
+@import "fontawesome/regular";
+@import "fontawesome/solid";
+@import "bootstrap";
+
+.card {
+  .card-img-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    background-color: #777777;
+    color: #fff;
+    font-size: 50px;
+  }
+}
+body, html {
+  height: 100%;
+}
+.primary {
+  background-image: image-url('background-1.jpg');
+  height: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 70px;
+  color: #fff;
+  .content {
+    margin: auto;
+    text-align: center;
+  }
+}
+.navbar {
+  border-radius: 5px;
+  &.bg-dark {
+    background-color: #3C5074 !important;
+  }
+}
+.margin-navbar-top {
+  margin-top: 70px;
+}

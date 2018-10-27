@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JtWedding</title>
+    <title>The Wedding of Jeanny &amp; Tataihono</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <%= render 'navigation' %>
+    <%= yield :heading %>
+    <div class="container <%= content_for?(:heading) ? 'mt-2' : 'margin-navbar-top' %>">
+      <%= yield %>
+    </div>
   </body>
 </html>

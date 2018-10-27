@@ -1,14 +1,27 @@
 <%= simple_form_for @invite, url: invite_path do |f| %>
-  <% if @invite.reception? %>
-    You are invited to the reception
-  <% end %>
+  <div class="card-deck">
+    <%= f.simple_fields_for :people do |p| %>
+    <div class="card">
+      <div class="card-img-top card-img-icon">
+        <% if p.object.child? %>
+        <i class="fal fa-child"></i>
+        <% elsif p.object.male? %>
+        <i class="fal fa-male"></i>
+        <% else %>
+        <i class="fal fa-female"></i>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= p.object.first_name %> <%= p.object.last_name %></h5>
+        <div class="card-text">
+          <%= p.input :coming, as: :radio_buttons, label: "Will #{p.object.primary? ? 'you' : p.object.first_name} be able to attend?" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
   <% if @invite.ask_food? %>
     <%= f.input :food_type, as: :radio_buttons, collection: Invite.food_types %>
   <% end %>
-  <%= f.simple_fields_for :people do |p| %>
-    <%= p.object.first_name %>
-    <%= p.object.last_name %>
-    <%= p.input :coming, as: :radio_buttons %>
-  <% end %>
-  <%= f.submit %>
+  <%= f.submit class: 'btn btn-primary', value: 'Save RSVP' %>
 <% end %>

@@ -1,3 +1,4 @@
 <%= simple_form_for Invite.new, url: invite_path do |f| %>
   <%= f.input :code %>
+  <%= f.submit class: 'btn btn-primary' %>
 <% end %>
