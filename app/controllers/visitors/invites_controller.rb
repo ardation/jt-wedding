@@ -1,4 +1,4 @@
-class InvitesController < ApplicationController
+class Visitors::InvitesController < VisitorsController
   skip_before_action :load_invite!, only: %i[new create]
 
   def new; end

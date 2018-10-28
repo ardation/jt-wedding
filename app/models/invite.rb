@@ -6,7 +6,7 @@ class Invite < ApplicationRecord
   validates :code, presence: true
   before_validation :generate_code, on: :create
   enum food_type: { savoury: 'savoury', drink: 'drink', salad: 'salad', dessert: 'dessert', unable: 'unable' }
-  accepts_nested_attributes_for :people
+  accepts_nested_attributes_for :people, allow_destroy: true
 
   protected
 
