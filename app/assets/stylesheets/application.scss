@@ -10,10 +10,12 @@ $theme-colors: (
 
 body, html {
   height: 100%;
+}
+body, html, .text-body {
   font-family: antique-olive, sans-serif;
   font-style: normal;
 }
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, .text-heading {
   font-family: parkside, cursive;
   font-weight: 400;
   font-style: normal;
@@ -53,7 +55,7 @@ h1, h2, h3, h4, h5 {
     align-items: center;
     flex-direction: column;
     padding-top: 70px;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.4);
     .messages {
       text-align: left;
     }

@@ -19,6 +19,8 @@ gem 'bootstrap', '~> 4.1.3'
 gem 'draper'
 gem 'devise'
 gem 'activeadmin'
+gem 'country_select'
+gem 'cocoon'
 
 group :development, :test do
   gem 'factory_bot_rails'
