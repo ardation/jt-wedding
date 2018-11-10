@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Invite::Person < ApplicationRecord
   belongs_to :invite
   validates :first_name, :last_name, :gender, presence: true

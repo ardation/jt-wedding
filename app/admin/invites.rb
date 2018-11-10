@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Invite do
   permit_params :reception, :ask_food, :rsvp, :food_type,
                 people_attributes: %i[primary first_name last_name gender child coming _destroy id]

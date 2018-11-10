@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Visitors::InvitesController < VisitorsController
   skip_before_action :load_invite!, only: %i[choose find new create]
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Invite < ApplicationRecord
   has_many :people, dependent: :destroy
   has_one :primary_person,
