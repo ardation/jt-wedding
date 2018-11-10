@@ -1,0 +1,9 @@
+language: ruby
+sudo: false
+cache: bundler
+script:
+  - rspec
+  - rubocop
+branches:
+  only:
+  - master
