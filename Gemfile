@@ -44,5 +44,8 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
+  gem 'factory_bot'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '4.0.0.rc1'
 end
