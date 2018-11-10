@@ -2,8 +2,8 @@ language: ruby
 sudo: false
 cache: bundler
 script:
-  - rspec
-  - rubocop
+  - bundle exec rspec
+  - bundle exec rubocop
 branches:
   only:
   - master
