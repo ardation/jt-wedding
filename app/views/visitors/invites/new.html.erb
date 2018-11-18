@@ -1,8 +1,23 @@
 <%= simple_form_for @invite, url: invite_path do |f| %>
   <div class="row">
     <div class="col-md-6">
-      <h2>Invite Details</h2>
-      <%= f.input :style, as: :radio_buttons, collection: Invite.styles, label: 'How would you like to receive your invitation?', required: true %>
+      <h2 class="text-center display-3 my-3">Invite Details</h2>
+      <%= f.input :phone, required: true %>
+      <div class="form-group">
+        <%= f.label :style, 'How would you like to receive your invitation?' %>
+        <div>
+          <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
+            <div class="btn btn-block" role="button" data-twbs-toggle-buttons-class-active="btn-primary">
+              <%= f.radio_button :style, 'physical' %>
+              Post
+            </div>
+            <div class="btn btn-block" role="button" data-twbs-toggle-buttons-class-active="btn-primary">
+              <%= f.radio_button :style, 'email' %>
+              Email
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="email">
         <%= f.input :email_address, required: true %>
       </div>
@@ -21,7 +36,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <h2>Your Family Details</h2>
+      <h2 class="text-center display-3 my-3">Your Family Details</h2>
       <div class="people">
         <%= f.simple_fields_for :people do |person| %>
           <%= render 'person_fields', f: person %>
@@ -32,5 +47,7 @@
       </div>
     </div>
   </div>
-  <%= f.submit class: 'btn btn-primary' %>
+  <div class="actions my-3">
+    <%= f.submit class: 'btn btn-primary', value: 'Send Me an Invite', data: { disable_with: 'Send Me an Invite' } %>
+  </div>
 <% end %>

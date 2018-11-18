@@ -1,5 +1,5 @@
 <%= simple_form_for @invite, url: invite_path do |f| %>
-  <div class="card-deck">
+  <div class="card-deck mb-2">
     <%= f.simple_fields_for :people do |p| %>
     <div class="card">
       <div class="card-img-top card-img-icon">
@@ -12,16 +12,40 @@
         <% end %>
       </div>
       <div class="card-body">
-        <h5 class="card-title"><%= p.object.first_name %> <%= p.object.last_name %></h5>
+        <h2 class="card-title text-center"><%= p.object.first_name %> <%= p.object.last_name %></h2>
         <div class="card-text">
-          <%= p.input :coming, as: :radio_buttons, label: "Will #{p.object.primary? ? 'you' : p.object.first_name} be able to attend?" %>
+          <%= p.label :coming, "Will #{p.object.primary? ? 'you' : p.object.first_name} be able to attend?" %>
+          <div class="form-group mb-0">
+            <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
+              <div class="btn btn-block" role="button">
+                <%= p.radio_button :coming, 'true' %>
+                Yes
+              </div>
+              <div class="btn btn-block" role="button">
+                <%= p.radio_button :coming, 'false' %>
+                No
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <% end %>
   </div>
   <% if @invite.ask_food? %>
-    <%= f.input :food_type, as: :radio_buttons, collection: Invite.food_types %>
+    <div class="form-group">
+      <%= f.label :food_type, 'Food Type' %>
+      <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
+        <% Invite.food_types.each do |key, value| %>
+        <div class="btn btn-block" role="button">
+          <%= f.radio_button :food_type, value %>
+          <%= value.titleize %>
+        </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-  <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send RSVP' %>
+  <div class="actions my-3">
+    <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send RSVP' %>
+  </div>
 <% end %>

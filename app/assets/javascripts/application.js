@@ -17,4 +17,13 @@
 //= require popper
 //= require bootstrap
 //= require cocoon
+//= require TwbsToggleButtons
+//= require jquery.twbs-toggle-buttons
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  $(".btn-group-toggle").twbsToggleButtons({
+    classActive: 'btn-secondary',
+    classInactive: 'btn-outline-secondary'
+  });
+});

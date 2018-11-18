@@ -10,7 +10,37 @@
       <%= link_to_remove_association '<i class="fal fa-trash"></i>'.html_safe, f, class: 'btn btn-danger' %>
     </div>
   </div>
-  <%= f.input :gender, as: :radio_buttons, collection: Invite::Person.genders %>
-  <%= f.input :child %>
+  <div class="row">
+    <div class="col">
+      <%= f.label :gender, 'Gender' %>
+      <div class="form-group">
+        <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
+          <div class="btn btn-block" role="button">
+            <%= f.radio_button :gender, 'male' %>
+            Guy
+          </div>
+          <div class="btn btn-block" role="button">
+            <%= f.radio_button :gender, 'female' %>
+            Girl
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label :child, 'Age' %>
+      <div class="form-group">
+        <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
+          <div class="btn btn-block" role="button">
+            <%= f.radio_button :child, 'false' %>
+            Adult
+          </div>
+          <div class="btn btn-block" role="button">
+            <%= f.radio_button :child, 'true' %>
+            Child
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <hr>
 </div>

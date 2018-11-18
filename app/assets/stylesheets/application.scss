@@ -1,6 +1,11 @@
+$color-navy: #152848;
+$color-pink: #EFB6B0;
+
 $theme-colors: (
-  "primary": #3C5074
+  "primary": $color-navy,
+  "secondary": $color-pink
 );
+
 
 @import "fontawesome/fontawesome";
 @import "fontawesome/light";
@@ -8,23 +13,31 @@ $theme-colors: (
 @import "fontawesome/solid";
 @import "bootstrap";
 
+@font-face {
+  font-family: 'daydream';
+  src: font-url('daydream.woff2') format('woff2'),
+       font-url('daydream.woff') format('woff'),
+       font-url('daydream.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body, html {
   height: 100%;
 }
 body, html, .text-body {
-  font-family: antique-olive, sans-serif;
+  font-family: brandon-grotesque, sans-serif;
   font-style: normal;
+  font-size: 1.15rem;
 }
 h1, h2, h3, h4, h5, .text-heading {
-  font-family: parkside, cursive;
-  font-weight: 400;
+  font-family: daydream, sans-serif;
+  font-weight: normal;
   font-style: normal;
+  text-transform: lowercase;
 }
 
 .card {
-  .card-title {
-    font-family: antique-olive, sans-serif;
-  }
   .card-img-icon {
     display: flex;
     align-items: center;
@@ -33,7 +46,14 @@ h1, h2, h3, h4, h5, .text-heading {
     background-color: #777777;
     color: #fff;
     font-size: 50px;
-
+  }
+}
+.card-deck {
+  margin-left: -5px;
+  margin-right: -5px;
+  .card {
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }
 .primary {
@@ -73,16 +93,39 @@ h1, h2, h3, h4, h5, .text-heading {
 .navbar {
   border-radius: 5px;
   height: 56px;
+  font-size: 1rem;
   &.bg-dark {
-    background-color: #3C5074 !important;
+    background-color: $color-navy !important;
+  }
+  .navbar-brand {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-family: brandon-grotesque, sans-serif;
+    text-transform: capitalize;
   }
 }
 .padding-navbar-top {
-  padding-top: 70px;
+  padding-top: 75px;
 }
 #invite_code {
   font-family: 'Courier New', Courier, monospace;
   font-size: 100px;
   height: 120px;
   width: 330px;
+}
+.btn-block + .btn-block {
+  margin-top: 0;
+}
+.text-navy {
+  color: $color-navy;
+}
+.text-pink {
+  color: $color-pink;
+}
+.actions {
+  background: #ececec;
+  text-align: right;
+  border-radius: 5px;
+  padding: 20px 15px;
 }

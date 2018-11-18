@@ -12,7 +12,7 @@
   <body>
     <%= render 'navigation' %>
     <%= yield :heading %>
-    <div class="container <%= content_for?(:heading) ? 'mt-2' : 'padding-navbar-top' %>">
+    <div class="container <%= content_for?(:heading) ? 'pt-3' : 'padding-navbar-top' %>">
       <% unless content_for?(:heading) %>
       <%= render 'messages' %>
       <% end %>
