@@ -46,6 +46,6 @@
     </div>
   <% end %>
   <div class="actions my-3">
-    <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send RSVP' %>
+    <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send RSVP', data: { disable_with: invite.rsvp? ? 'Update RSVP' : 'Send RSVP' }  %>
   </div>
 <% end %>
