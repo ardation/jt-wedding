@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="text-center display-3 my-3">Invite Details</h2>
-      <%= f.input :phone, required: true %>
+      <%= f.input :phone %>
       <div class="form-group">
         <%= f.label :style, 'How would you like to receive your invitation?' %>
         <div>
@@ -32,7 +32,7 @@
             <%= f.input :postal_code %>
           </div>
         </div>
-        <%= f.input :country, priority: ['New Zealand'] %>
+        <%= f.input :country, priority: ['New Zealand'], required: true %>
       </div>
     </div>
     <div class="col-md-6">

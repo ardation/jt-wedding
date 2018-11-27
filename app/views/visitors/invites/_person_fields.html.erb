@@ -15,30 +15,32 @@
       <%= f.label :gender, 'Gender' %>
       <div class="form-group">
         <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-          <div class="btn btn-block" role="button">
-            <%= f.radio_button :gender, 'male' %>
+          <div class="btn btn-block <%= 'active' if f.object.male? %>" role="button">
+            <%= f.radio_button :gender, 'male', checked: ('checked' if f.object.male?) %>
             Guy
           </div>
-          <div class="btn btn-block" role="button">
-            <%= f.radio_button :gender, 'female' %>
+          <div class="btn btn-block <%= 'active' if f.object.female? %>" role="button">
+            <%= f.radio_button :gender, 'female', checked: ('checked' if f.object.female?) %>
             Girl
           </div>
         </div>
+        <%= f.error :gender, class: 'invalid-feedback d-block' %>
       </div>
     </div>
     <div class="flex-fill">
-      <%= f.label :child, 'Age' %>
+      <%= f.label :age, 'Age' %>
       <div class="form-group">
         <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-          <div class="btn btn-block" role="button">
-            <%= f.radio_button :child, 'false' %>
+          <div class="btn btn-block <%= 'active' if f.object.adult? %>" role="button">
+            <%= f.radio_button :age, 'adult', checked: ('checked' if f.object.adult?) %>
             Adult
           </div>
-          <div class="btn btn-block" role="button">
-            <%= f.radio_button :child, 'true' %>
+          <div class="btn btn-block <%= 'active' if f.object.child? %>" role="button">
+            <%= f.radio_button :age, 'child', checked: ('checked' if f.object.child?) %>
             Child
           </div>
         </div>
+        <%= f.error :age, class: 'invalid-feedback d-block' %>
       </div>
     </div>
   </div>

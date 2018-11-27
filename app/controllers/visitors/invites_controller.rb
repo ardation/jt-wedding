@@ -57,7 +57,7 @@ class Visitors::InvitesController < VisitorsController
 
     params.require(:invite).permit(
       :style, :email_address, :street, :suburb, :city, :postal_code, :country,
-      people_attributes: %i[first_name last_name gender child]
+      people_attributes: %i[first_name last_name gender age]
     )
   end
 
