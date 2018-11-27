@@ -7,13 +7,13 @@
         <%= f.label :style, 'How would you like to receive your invitation?' %>
         <div>
           <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-            <div class="btn btn-block" role="button" data-twbs-toggle-buttons-class-active="btn-primary">
+            <div class="btn btn-block active" role="button">
+              <%= f.radio_button :style, 'email', checked: 'checked' %>
+              Email
+            </div>
+            <div class="btn btn-block" role="button">
               <%= f.radio_button :style, 'physical' %>
               Post
-            </div>
-            <div class="btn btn-block" role="button" data-twbs-toggle-buttons-class-active="btn-primary">
-              <%= f.radio_button :style, 'email' %>
-              Email
             </div>
           </div>
         </div>

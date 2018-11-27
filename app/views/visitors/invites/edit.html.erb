@@ -34,7 +34,8 @@
   </div>
   <% if @invite.ask_food? %>
     <div class="form-group">
-      <%= f.label :food_type, 'Food Type' %>
+      If you could bring a plate of food to share during the afternoon tea that would really help us!
+      <%= f.label :food_type, 'Please indicate a type of food for catering purposes.' %>
       <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
         <% Invite.food_types.each do |key, value| %>
         <div class="btn btn-block" role="button">
