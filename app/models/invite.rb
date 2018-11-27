@@ -12,10 +12,15 @@ class Invite < ApplicationRecord
   enum style: { email: 'email', physical: 'physical' }
   validates :email_address, presence: true, if: :email?
   validates :street, :suburb, :city, :country, presence: true, if: :physical?
+  after_commit :set_primary_person, on: :create
 
   protected
 
   def generate_code
     self.code = SecureRandom.hex[1..5].upcase
+  end
+
+  def set_primary_person
+    people.first.update(primary: true)
   end
 end

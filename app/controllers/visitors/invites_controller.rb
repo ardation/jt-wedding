@@ -44,7 +44,7 @@ class Visitors::InvitesController < VisitorsController
 
   def build_invite
     @invite ||= Invite.new
-    @invite.attributes = invite_create_params.merge(rsvp: true) if params[:action] == 'create'
+    @invite.attributes = invite_create_params.merge(rsvp: false) if params[:action] == 'create'
     @invite.attributes = invite_update_params.merge(rsvp: true) if params[:action] == 'update'
   end
 
