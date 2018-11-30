@@ -56,7 +56,7 @@ class Visitors::InvitesController < VisitorsController
     return {} unless params[:invite]
 
     params.require(:invite).permit(
-      :style, :email_address, :street, :suburb, :city, :postal_code, :country,
+      :style, :email_address, :street, :suburb, :city, :postal_code, :country, :phone,
       people_attributes: %i[first_name last_name gender age]
     )
   end
