@@ -4,15 +4,15 @@
       <h2 class="text-center display-3 my-3">Invite Details</h2>
       <%= f.input :phone %>
       <div class="form-group">
-        <%= f.label :style, 'How would you like to receive your invitation?' %>
+        <%= f.label :style, label: 'How would you like to receive your invitation?', required: true %>
         <div>
           <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-            <div class="btn btn-block active" role="button">
-              <%= f.radio_button :style, 'email', checked: 'checked' %>
+            <div class="btn btn-block <%= 'active' if f.object.email? %>" role="button">
+              <%= f.radio_button :style, 'email', checked: ('checked' if f.object.email?) %>
               Email
             </div>
-            <div class="btn btn-block" role="button">
-              <%= f.radio_button :style, 'physical' %>
+            <div class="btn btn-block <%= 'active' if f.object.physical? %>" role="button">
+              <%= f.radio_button :style, 'physical', checked: ('checked' if f.object.physical?) %>
               Post
             </div>
           </div>
@@ -42,7 +42,7 @@
           <%= render 'person_fields', f: person %>
         <% end %>
         <div class="links">
-          <%= link_to_add_association 'Add Person', f, :people, class: 'btn btn-secondary' %>
+          <%= link_to_add_association 'Add Family Member', f, :people, class: 'btn btn-secondary' %>
         </div>
       </div>
     </div>

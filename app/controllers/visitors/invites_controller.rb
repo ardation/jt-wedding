@@ -21,7 +21,8 @@ class Visitors::InvitesController < VisitorsController
     build_invite
     return render 'new' unless save_invite
 
-    flash[:success] = 'Woohoo! We have received your request for an invite.'
+    flash[:success] =
+      'Woohoo! We have received your request for an invite. We will send you an invite in the coming weeks!'
     redirect_to root_path
   end
 
