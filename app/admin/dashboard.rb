@@ -3,11 +3,9 @@
 ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
   content title: proc { I18n.t('active_admin.dashboard') } do
-    div class: 'blank_slate_container', id: 'dashboard_default_message' do
-      span class: 'blank_slate' do
-        span I18n.t('active_admin.dashboard_welcome.welcome')
-        small I18n.t('active_admin.dashboard_welcome.call_to_action')
-      end
+    panel 'Invite Status' do
+      h1 "#{pluralize Invite.count, 'invite'} requested for #{pluralize Invite::Person.count, 'person'}"
+      h1 "#{pluralize Invite.where(rsvp: true).count, 'invite'} with RSVPs for #{pluralize Invite.where(rsvp: true).joins(:people).count, 'person'}"
     end
   end
 end
