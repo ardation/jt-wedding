@@ -16,7 +16,7 @@ ActiveAdmin.register Invite do
   end
 
   csv do
-    id_column
+    column :id
     column :admin_name
     column :style
     column :code
