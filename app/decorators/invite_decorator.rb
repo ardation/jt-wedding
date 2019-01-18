@@ -2,9 +2,7 @@
 
 class InviteDecorator < ApplicationDecorator
   def name
-    return "#{last_names} Whanau" if object.people.many?
-
-    "#{primary_person&.first_name} #{primary_person&.last_name}".strip
+    first_names
   end
 
   def admin_name
