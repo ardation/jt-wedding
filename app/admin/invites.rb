@@ -15,6 +15,21 @@ ActiveAdmin.register Invite do
     actions
   end
 
+  csv do
+    id_column
+    column :admin_name
+    column :style
+    column :code
+    column :phone
+    column :email
+    column :street
+    column :suburb
+    column :city
+    column :postal_code
+    column :country
+    column :created_at
+  end
+
   show do
     columns do
       column span: 6 do
