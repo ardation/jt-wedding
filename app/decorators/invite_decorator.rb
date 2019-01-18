@@ -8,7 +8,7 @@ class InviteDecorator < ApplicationDecorator
   end
 
   def admin_name
-    object.people.order(primary: :desc).pluck(:first_name).to_sentence
+    object.people.order(primary: :desc).pluck(:first_name).map(&:strip).to_sentence
   end
 
   protected
@@ -18,6 +18,6 @@ class InviteDecorator < ApplicationDecorator
   end
 
   def names_to_sentence
-    object.people.order(primary: :desc).pluck(:last_name).uniq.to_sentence
+    object.people.order(primary: :desc).pluck(:last_name).uniq.map(&:strip).to_sentence
   end
 end
