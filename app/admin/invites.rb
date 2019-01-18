@@ -21,7 +21,7 @@ ActiveAdmin.register Invite do
     column :style
     column :code
     column :phone
-    column :email
+    column :email_address
     column :street
     column :suburb
     column :city
@@ -51,7 +51,7 @@ ActiveAdmin.register Invite do
             row :style
             row :food_type
             row :rsvp
-            row :email
+            row :email_address
             row :street
             row :suburb
             row :city
