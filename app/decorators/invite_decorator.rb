@@ -20,6 +20,6 @@ class InviteDecorator < ApplicationDecorator
   end
 
   def last_names
-    object.people.order(primary: :desc).pluck(:last_name).uniq.map(&:strip).to_sentence
+    object.people.order(primary: :desc).pluck(:last_name).map(&:strip).map(&:titleize).uniq.to_sentence
   end
 end
