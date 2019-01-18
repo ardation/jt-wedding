@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Invite do
-  permit_params :reception, :ask_food, :rsvp, :food_type, :phone,
+
+  permit_params :reception, :ask_food, :rsvp, :food_type, :phone, :style, :email_address,
+                :street, :suburb, :city, :postal_code, :country,
                 people_attributes: %i[primary first_name last_name gender age coming _destroy id]
   decorate_with InviteDecorator
 
@@ -71,6 +73,13 @@ ActiveAdmin.register Invite do
       f.input :rsvp
       f.input :food_type, collection: Invite.food_types, as: :radio
       f.input :phone
+      f.input :style
+      f.input :email_address
+      f.input :street
+      f.input :suburb
+      f.input :city
+      f.input :postal_code
+      f.input :country
     end
     f.inputs 'People' do
       f.has_many :people, allow_destroy: true, new_record: true, heading: nil do |p|
