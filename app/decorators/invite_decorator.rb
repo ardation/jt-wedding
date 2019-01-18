@@ -13,6 +13,10 @@ class InviteDecorator < ApplicationDecorator
 
   protected
 
+  def primary_person
+    object.people.order(primary: :desc).first
+  end
+
   def names_to_sentence
     object.people.order(primary: :desc).pluck(:last_name).uniq.to_sentence
   end
