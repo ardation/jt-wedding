@@ -2,13 +2,13 @@
 
 class InviteDecorator < ApplicationDecorator
   def name
-    return "#{names_to_sentence} Whanau" if object.people.many?
+    return "#{last_names} Whanau" if object.people.many?
 
-    "#{primary_person.first_name} #{primary_person.last_name}".strip
+    "#{primary_person&.first_name} #{primary_person&.last_name}".strip
   end
 
   def admin_name
-    object.people.order(primary: :desc).pluck(:first_name).map(&:strip).to_sentence
+    "#{first_names} #{last_names}".strip
   end
 
   protected
@@ -17,7 +17,11 @@ class InviteDecorator < ApplicationDecorator
     object.people.order(primary: :desc).first
   end
 
-  def names_to_sentence
+  def first_names
+    object.people.order(primary: :desc).pluck(:first_name).map(&:strip).to_sentence
+  end
+
+  def last_names
     object.people.order(primary: :desc).pluck(:last_name).uniq.map(&:strip).to_sentence
   end
 end
