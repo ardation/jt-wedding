@@ -32,7 +32,7 @@
         Open on Google Maps
       </button>
     </columns>
-    <% if !@invite.reception %>
+    <% if @invite.reception %>
     <columns>
       <h6 class="text-center">Reception</h6>
       <p class="text-center">
