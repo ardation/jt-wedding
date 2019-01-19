@@ -97,4 +97,9 @@ ActiveAdmin.register Invite do
     end
     f.actions
   end
+
+  member_action :send_invite, method: :put do
+    resource.send_invite
+    redirect_to resource_path, notice: 'Invite sent!'
+  end
 end

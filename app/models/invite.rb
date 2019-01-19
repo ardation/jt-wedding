@@ -14,14 +14,23 @@ class Invite < ApplicationRecord
   validates :street, :suburb, :city, :country, presence: true, if: :physical?
   after_commit :set_primary_person, on: :create
 
+  def send_invite
+    send_email_invite
+    send_sms_invite
+  end
+
   def send_email_invite
-    InviteMailer.invite(self).deliver_now if !rsvp? && email?
+    return if rsvp? || !email?
+
+    InviteMailer.invite(self).deliver_now
   end
 
   def send_sms_invite
+    return if rsvp?
+
     SmsGatewayMeService.send_message(
       phone,
-      "Hey #{primary_person.first_name}, your invite is on the way! "\
+      "Hey #{primary_person.first_name}, Jeanny & Tataihono here. your invite to our wedding is on the way! "\
       "Meanwhile you can RSVP by going to this link: #{decorate.invite_url}."
     )
   end
