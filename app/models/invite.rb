@@ -17,6 +17,7 @@ class Invite < ApplicationRecord
   def send_invite
     send_email_invite
     send_sms_invite
+    update(invited_at: Time.current)
   end
 
   def send_email_invite
@@ -30,8 +31,8 @@ class Invite < ApplicationRecord
 
     SmsGatewayMeService.send_message(
       phone,
-      "Hey #{primary_person.first_name}, Jeanny & Tataihono here. your invite to our wedding is on the way! "\
-      "Meanwhile you can RSVP by going to this link: #{decorate.invite_url}."
+      "Hey #{primary_person.first_name.strip.capitalize}, Jeanny & Tataihono here. your invite to our wedding "\
+      "is on the way! Meanwhile you can RSVP by going to this link: #{decorate.invite_url}."
     )
   end
 

@@ -61,6 +61,8 @@ ActiveAdmin.register Invite do
             row :city
             row :postal_code
             row :country
+            row :code
+            row :invited_at
           end
         end
       end
@@ -98,8 +100,27 @@ ActiveAdmin.register Invite do
     f.actions
   end
 
+  action_item :send_invite, only: :show do
+    link_to 'Send Invite', send_invite_admin_invite_path(invite), method: :put unless invite.rsvp?
+  end
+
   member_action :send_invite, method: :put do
+    if resource.invited_at && resource.invited_at.to_date > 5.days.ago.to_date
+      date = (resource.invited_at.to_date + 5.days).to_formatted_s(:long)
+      return redirect_to resource_path, flash: { error: "Invite already sent recently, try again on #{date}!" }
+    end
+
     resource.send_invite
     redirect_to resource_path, notice: 'Invite sent!'
+  end
+
+  batch_action :send_invite do |ids|
+    batch_action_collection.where(id: ids).find_each do |invite|
+      next if invite.invited_at && invite.invited_at.to_date > 5.days.ago.to_date
+
+      invite.send_invite
+    end
+
+    redirect_to collection_path, notice: 'Invites sent!'
   end
 end
