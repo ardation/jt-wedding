@@ -1,0 +1,53 @@
+<container class="content">
+  Su Fen Tang &amp; Elizabeth Nikora warmly invite
+  <h3 class="text-center" style="margin-top: 5px; margin-bottom: 5px;"><%= @invite.name %></h3>
+  to the wedding of
+  <%= image_tag image_url 'names.png', alt: 'Jeanny &amp; Tataihono' %>
+  <p class="text-center">
+    to celebrate what God brings together in marriage on
+  </p>
+  <strong>Saturday 11th May 2019</strong>
+</container>
+<container class="reason text-center">
+  <div class="text-center">
+    <button href="<%= @invite_url %>" class="expanded">Send My RSVP</button>
+    <p class="text-center">Please RSVP by 28th February 2019</p>
+    Link not working? Go to <a href="<%= @invite_url %>"><%= root_url %></a> using your invite code: <strong><%= @invite.code %></strong>
+  </div>
+</container>
+<container class="reason text-center">
+  <row>
+    <columns>
+      <h6 class="text-center">Ceremony</h6>
+      <p class="text-center">
+        Auckland Baptist Tabernacle
+        <br>
+        429 Queen St, Auckland
+        <br>
+        Afternoon Tea to Follow
+        <br>
+        1 - 2pm
+      </p>
+      <button class="expanded secondary" style="margin-bottom: 0" href="https://www.google.com/maps/place/Auckland+Baptist+Tabernacle/@-36.857422,174.7591513,17z/data=!4m13!1m7!3m6!1s0x6d0d47e8fbd78d59:0x14a2c8114c0d737f!2s429+Queen+St,+Auckland,+1010!3b1!8m2!3d-36.857422!4d174.76134!3m4!1s0x6d0d47e8f466b573:0x2d8ba1dcbf253915!8m2!3d-36.857422!4d174.76134">
+        Open on Google Maps
+      </button>
+    </columns>
+    <% if !@invite.reception %>
+    <columns>
+      <h6 class="text-center">Reception</h6>
+      <p class="text-center">
+          Grand Park Chinese Restaurant
+        <br>
+        Alexandra Park
+        <br>
+        Green Ln W, Epsom, Auckland
+        <br>
+        5.30pm - 10pm
+      </p>
+      <button class="expanded secondary" style="margin-bottom: 0" href="https://www.google.com/maps/place/Grand+Park+Chinese+Seafood+Restaurant/@-36.8923332,174.7739165,17z/data=!3m1!4b1!4m5!3m4!1s0x6d0d4882ce0bfc5b:0xa5406d5e11373b0a!8m2!3d-36.8923332!4d174.7761052">
+        Open on Google Maps
+      </button>
+    </columns>
+    <% end %>
+  </row>
+</container>

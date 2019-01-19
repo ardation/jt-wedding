@@ -9,6 +9,10 @@ class InviteDecorator < ApplicationDecorator
     "#{first_names} #{last_names}".strip
   end
 
+  def invite_url
+    h.find_invite_url(invite: { code: code })
+  end
+
   protected
 
   def primary_person
@@ -16,10 +20,10 @@ class InviteDecorator < ApplicationDecorator
   end
 
   def first_names
-    object.people.order(primary: :desc).pluck(:first_name).map(&:strip).to_sentence
+    object.people.order(primary: :desc).pluck(:first_name).map(&:strip).map(&:capitalize).to_sentence
   end
 
   def last_names
-    object.people.order(primary: :desc).pluck(:last_name).map(&:strip).map(&:titleize).uniq.to_sentence
+    object.people.order(primary: :desc).pluck(:last_name).map(&:strip).map(&:capitalize).uniq.to_sentence
   end
 end

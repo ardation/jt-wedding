@@ -14,6 +14,10 @@ class Invite < ApplicationRecord
   validates :street, :suburb, :city, :country, presence: true, if: :physical?
   after_commit :set_primary_person, on: :create
 
+  def send_email_invite
+    InviteMailer.invite(self).deliver_now if !rsvp? && email?
+  end
+
   protected
 
   def generate_code

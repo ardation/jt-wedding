@@ -13,9 +13,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'country_select'
 gem 'devise'
 gem 'draper'
+gem 'inky-rb', require: 'inky'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'premailer-rails'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
 gem 'redis', '~> 4.0'
@@ -23,6 +25,10 @@ gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+
+group :production do
+  gem 'mailgun-ruby', '~>1.1.6'
+end
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -34,6 +40,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'solargraph'
   gem 'spring'
