@@ -21,6 +21,7 @@ gem 'premailer-rails'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
 gem 'redis', '~> 4.0'
+gem 'rest-client'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
@@ -32,6 +33,7 @@ end
 
 group :development, :test do
   gem 'factory_bot_rails'
+  gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'pry-rescue'

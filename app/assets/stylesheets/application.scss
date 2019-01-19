@@ -131,3 +131,18 @@ h1, h2, h3, h4, h5, .text-heading {
 .remove_association {
   margin-top: 2.16rem;
 }
+.ceremony {
+  background-image: image-url('ceremony.jpg');
+  background-size: cover;
+}
+.gifts {
+  background-image: image-url('gifts.jpg');
+  background-size: cover;
+}
+.reception {
+  background-image: image-url('reception.jpg');
+  background-size: cover;
+}
+.btn-group-toggle input[type=radio] {
+  display: none;
+}

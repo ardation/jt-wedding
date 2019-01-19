@@ -18,6 +18,14 @@ class Invite < ApplicationRecord
     InviteMailer.invite(self).deliver_now if !rsvp? && email?
   end
 
+  def send_sms_invite
+    SmsGatewayMeService.send_message(
+      phone,
+      "Hey #{primary_person.first_name}, your invite is on the way! "\
+      "Meanwhile you can RSVP by going to this link: #{decorate.invite_url}."
+    )
+  end
+
   protected
 
   def generate_code

@@ -4,7 +4,7 @@ ActiveAdmin.register Invite do
 
   permit_params :reception, :ask_food, :rsvp, :food_type, :phone, :style, :email_address,
                 :street, :suburb, :city, :postal_code, :country,
-                people_attributes: %i[primary first_name last_name gender age coming _destroy id]
+                people_attributes: %i[primary first_name last_name gender age coming job_title job_url _destroy id]
   decorate_with InviteDecorator
 
   index do
@@ -42,6 +42,8 @@ ActiveAdmin.register Invite do
             column :age
             column :coming
             column :primary
+            column :job_title
+            column :job_url
           end
         end
         active_admin_comments
@@ -89,6 +91,8 @@ ActiveAdmin.register Invite do
         p.input :gender, collection: Invite::Person.genders, as: :radio
         p.input :age, collection: Invite::Person.ages, as: :radio
         p.input :coming
+        p.input :job_title
+        p.input :job_url
       end
     end
     f.actions

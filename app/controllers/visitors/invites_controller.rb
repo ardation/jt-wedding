@@ -6,10 +6,11 @@ class Visitors::InvitesController < VisitorsController
   def choose; end
 
   def find
-    find_invite
+    code = params.dig(:invite, :code) || params[:code]
+    find_invite(code)
     return redirect_to root_path if @invite
 
-    flash[:error] = 'Hmm. That code is not quite right. Try again!' if params.dig(:invite, :code)
+    flash[:error] = 'Hmm. That code is not quite right. Try again!' if code
   end
 
   def new
@@ -38,8 +39,8 @@ class Visitors::InvitesController < VisitorsController
 
   protected
 
-  def find_invite
-    @invite = Invite.find_by(code: params[:invite][:code].upcase) if params.dig(:invite, :code)
+  def find_invite(code)
+    @invite = Invite.find_by(code: code.upcase) if code.present?
     session[:invite_id] = @invite&.id
   end
 

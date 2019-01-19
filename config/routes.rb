@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         get 'choose'
         get 'find'
         post 'find'
+        get 'find/:code', to: 'invites#find', as: 'find_with_code'
       end
     end
   end

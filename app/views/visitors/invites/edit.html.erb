@@ -2,47 +2,57 @@
   <div class="card-deck mb-2">
     <%= f.simple_fields_for :people do |p| %>
     <div class="card">
-      <div class="card-img-top card-img-icon">
-        <% if p.object.child? %>
-        <i class="fal fa-child"></i>
-        <% elsif p.object.male? %>
-        <i class="fal fa-male"></i>
-        <% else %>
-        <i class="fal fa-female"></i>
-        <% end %>
-      </div>
-      <div class="card-body">
-        <h2 class="card-title text-center"><%= p.object.first_name %> <%= p.object.last_name %></h2>
+      <div class="card-body text-center">
+        <h2 class="card-title"><%= p.object.first_name.capitalize %> <%= p.object.last_name.capitalize %></h2>
         <div class="card-text">
-          <%= p.label :coming, "Will #{p.object.primary? ? 'you' : p.object.first_name} be able to attend?" %>
+          <%= p.label :coming, "Will #{p.object.primary? ? 'you' : p.object.first_name.capitalize} be able to attend?" %>
           <div class="form-group mb-0">
             <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-              <div class="btn btn-block" role="button">
+              <div class="btn btn-block <%= 'active' if p.object.coming? %>" role="button">
                 <%= p.radio_button :coming, 'true' %>
                 Yes
               </div>
-              <div class="btn btn-block" role="button">
+              <div class="btn btn-block <%= 'active' unless p.object.coming? %>" role="button">
                 <%= p.radio_button :coming, 'false' %>
                 No
               </div>
             </div>
           </div>
+          <% if p.object.job_title.present? %>
+          <p class="mt-3">
+            Thanks for helping us by agreeing to be <%= indefinite_articlerize(p.object.job_title).downcase %>!<br>
+            <small>Please be sure to read over your job description by clicking the link below.</small>
+          </p>
+          <%= link_to 'Job Description', p.object.job_url, class: 'btn btn-primary btn-block', target: '_blank' %>
+          <% end %>
         </div>
       </div>
     </div>
     <% end %>
   </div>
   <% if @invite.ask_food? %>
-    <div class="form-group">
-      If you could bring a plate of food to share during the afternoon tea that would really help us!
-      <%= f.label :food_type, 'Please indicate a type of food for catering purposes.' %>
-      <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-        <% Invite.food_types.each do |key, value| %>
-        <div class="btn btn-block" role="button">
-          <%= f.radio_button :food_type, value %>
-          <%= value.titleize %>
+    <div class="card">
+      <div class="card-body text-center">
+        <h2 class="card-title">Afternoon Tea</h2>
+        <p>
+          Could you bring a plate of food to share during afternoon tea? That would really help us!<br>
+          <small>Please indicate a type of food for catering purposes.</small>
+        </p>
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <div class="row">
+            <% Invite.food_types.each do |key, value| %>
+            <div class="col text-center">
+              <div class="btn btn-block <%= 'active' if f.object.food_type == value %>" role="button">
+                <%= f.radio_button :food_type, value %>
+                <%= value.titleize %>
+              </div>
+              <small class="text-muted">
+                <%= pluralize Invite.where(food_type: value).count, 'person' unless value == 'unable' %>
+              </small>
+            </div>
+            <% end %>
+          </div>
         </div>
-        <% end %>
       </div>
     </div>
   <% end %>

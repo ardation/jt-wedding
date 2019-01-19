@@ -5,13 +5,13 @@
       <%= render 'messages' %>
     </div>
     <div class="content">
-      <h1 class="display-2 mb-0 text-pink">Welcome <%= invite.name %></h1>
+      <h1 class="display-2 mb-0 text-pink"><%= invite.name %></h1>
       <h1 class="display-4">We are excited to invite you to our wedding</h1>
-      <p class="lead">Join us on 11 May 2019 as we get married!</p>
+      <p class="lead">Join us on 11th May 2019 as we get married!</p>
       <%= link_to invite.rsvp? ? 'Update RSVP' : 'Send My RSVP', edit_invite_path, class: "btn #{invite.rsvp? ? 'btn-secondary' : 'btn-light'} btn-lg" %>
     </div>
     <div class="footer">
-      Invite &nbsp; <span class="display-4"><i class="fal fa-chevron-double-down"></i></span> &nbsp; Details
+      Invite &nbsp; <span class="display-4"><i class="fal fa-chevron-double-down"></i></span> &nbsp; Detail
     </div>
   </div>
 </div>
