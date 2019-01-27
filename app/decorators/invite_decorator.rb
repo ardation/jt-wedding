@@ -29,7 +29,8 @@ class InviteDecorator < ApplicationDecorator
     event.dtstart = Icalendar::Values::DateTime.new DateTime.new(2019, 5, 11, 13, 0, 0), 'tzid' => 'Pacific/Auckland'
     event.dtend   = Icalendar::Values::DateTime.new DateTime.new(2019, 5, 11, 14, 0, 0), 'tzid' => 'Pacific/Auckland'
     event.summary = 'Jeanny & Tataihono\'s Wedding Ceremony'
-    event.organizer = Icalendar::Values::CalAddress.new('mailto:tataihono.nikora@gmail.com', cn: 'Tataihono Nikora')
+    event.organizer = Icalendar::Values::CalAddress.new('mailto:no-reply@jeannyandtataihono.com')
+    event.attendee = Icalendar::Values::CalAddress.new("mailto:#{email_address}", cn: name, rsvp: true)
     event.description = 'Come and celebrate what God brings together in marriage! Afternoon Tea to follow.'
     event.url = invite_url
     event.location = 'Auckland Baptist Tabernacle, 429 Queen St, Auckland, 1010'
@@ -40,7 +41,8 @@ class InviteDecorator < ApplicationDecorator
     event.dtstart = Icalendar::Values::DateTime.new DateTime.new(2019, 5, 11, 18, 0, 0), 'tzid' => 'Pacific/Auckland'
     event.dtend   = Icalendar::Values::DateTime.new DateTime.new(2019, 5, 11, 22, 0, 0), 'tzid' => 'Pacific/Auckland'
     event.summary = 'Jeanny & Tataihono\'s Wedding Reception'
-    event.organizer = Icalendar::Values::CalAddress.new('mailto:tataihono.nikora@gmail.com', cn: 'Tataihono Nikora')
+    event.organizer = Icalendar::Values::CalAddress.new('mailto:no-reply@jeannyandtataihono.com')
+    event.attendee = Icalendar::Values::CalAddress.new("mailto:#{email_address}", cn: name, rsvp: true)
     event.description = 'Continue the celebration over a meal with us!'
     event.url = invite_url
     event.location =
