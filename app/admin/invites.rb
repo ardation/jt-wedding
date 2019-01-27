@@ -105,10 +105,10 @@ ActiveAdmin.register Invite do
   end
 
   member_action :send_invite, method: :put do
-    if resource.invited_at && resource.invited_at.to_date > 5.days.ago.to_date
-      date = (resource.invited_at.to_date + 5.days).to_formatted_s(:long)
-      return redirect_to resource_path, flash: { error: "Invite already sent recently, try again on #{date}!" }
-    end
+    # if resource.invited_at && resource.invited_at.to_date > 5.days.ago.to_date
+    #   date = (resource.invited_at.to_date + 5.days).to_formatted_s(:long)
+    #   return redirect_to resource_path, flash: { error: "Invite already sent recently, try again on #{date}!" }
+    # end
 
     resource.send_invite
     redirect_to resource_path, notice: 'Invite sent!'
