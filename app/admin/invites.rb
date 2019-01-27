@@ -7,6 +7,19 @@ ActiveAdmin.register Invite do
                 people_attributes: %i[primary first_name last_name gender age coming job_title job_url _destroy id]
   decorate_with InviteDecorator
 
+  filter :people_first_name_cont, label: 'First Name'
+  filter :people_last_name_cont, label: 'Last Name'
+  filter :phone
+  filter :email_address
+  filter :style, as: :check_boxes, collection: Invite.styles
+  filter :food_type, as: :select, collection: Invite.food_types
+  filter :people_job_title_cont, label: 'Job Title'
+
+  scope :all, default: true
+  scope(:reception) { |scope| scope.where(reception: true) }
+  scope(:ask_food) { |scope| scope.where(ask_food: true) }
+  scope(:received) { |scope| scope.where(rsvp: true) }
+
   index do
     selectable_column
     id_column
@@ -49,19 +62,30 @@ ActiveAdmin.register Invite do
         active_admin_comments
       end
       column span: 6 do
-        panel 'Details' do
+        panel 'Contact Details' do
           attributes_table_for invite do
             row :phone
             row :style
+            if invite.email?
+              row :email_address
+            elsif invite.physical?
+              row :street
+              row :suburb
+              row :city
+              row :postal_code
+              row :country
+            end
+          end
+        end
+
+        panel 'Invite Details' do
+          attributes_table_for invite do
             row :food_type
+            row :reception
             row :rsvp
-            row :email_address
-            row :street
-            row :suburb
-            row :city
-            row :postal_code
-            row :country
-            row :code
+            row :code do |invite|
+              link_to invite.code, invite.invite_url, target: '_blank'
+            end
             row :invited_at
           end
         end
@@ -70,7 +94,7 @@ ActiveAdmin.register Invite do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors(*f.object.errors.keys)
     f.inputs 'Details' do
       f.input :reception
       f.input :ask_food
@@ -105,11 +129,6 @@ ActiveAdmin.register Invite do
   end
 
   member_action :send_invite, method: :put do
-    # if resource.invited_at && resource.invited_at.to_date > 5.days.ago.to_date
-    #   date = (resource.invited_at.to_date + 5.days).to_formatted_s(:long)
-    #   return redirect_to resource_path, flash: { error: "Invite already sent recently, try again on #{date}!" }
-    # end
-
     resource.send_invite
     redirect_to resource_path, notice: 'Invite sent!'
   end
