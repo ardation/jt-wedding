@@ -155,6 +155,9 @@ GEM
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
+    icalendar (2.5.2)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.3)
     inherited_resources (1.9.0)
       actionpack (>= 4.2, < 5.3)
       has_scope (~> 0.6)
@@ -287,6 +290,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    rb-readline (0.5.5)
     redis (4.0.2)
     regexp_parser (1.2.0)
     request_store (1.4.1)
@@ -419,6 +423,7 @@ DEPENDENCIES
   draper
   factory_bot
   factory_bot_rails
+  icalendar
   inky-rb
   jbuilder (~> 2.5)
   jquery-rails
@@ -433,6 +438,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails-controller-testing
+  rb-readline
   redis (~> 4.0)
   rest-client
   rspec-rails
