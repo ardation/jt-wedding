@@ -4,7 +4,7 @@ ActiveAdmin.register Invite do
   batch_action :destroy, false
   permit_params :reception, :ask_food, :rsvp, :food_type, :phone, :style, :email_address,
                 :street, :suburb, :city, :postal_code, :country,
-                people_attributes: %i[primary first_name last_name gender age coming job_title job_url _destroy id]
+                people_attributes: %i[primary first_name last_name gender age coming job_id _destroy id]
   decorate_with InviteDecorator
 
   filter :people_first_name_cont, label: 'First Name'
@@ -13,7 +13,7 @@ ActiveAdmin.register Invite do
   filter :email_address
   filter :style, as: :check_boxes, collection: Invite.styles
   filter :food_type, as: :select, collection: Invite.food_types
-  filter :people_job_title_cont, label: 'Job Title'
+  filter :people_job_id, as: :select, collection: Job.pluck(:title, :id), label: 'Job'
 
   scope :all, default: true
   scope(:received) { |scope| scope.where(invited_at: nil) }
@@ -123,8 +123,7 @@ ActiveAdmin.register Invite do
         p.input :gender, collection: Invite::Person.genders, as: :radio
         p.input :age, collection: Invite::Person.ages, as: :radio
         p.input :coming
-        p.input :job_title
-        p.input :job_url
+        p.input :job
       end
     end
     f.actions

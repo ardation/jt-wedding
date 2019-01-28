@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_19_192706) do
+ActiveRecord::Schema.define(version: 2019_01_28_210028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 2019_01_19_192706) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "age"
-    t.string "job_title"
-    t.string "job_url"
+    t.bigint "job_id"
     t.index ["invite_id"], name: "index_invite_people_on_invite_id"
+    t.index ["job_id"], name: "index_invite_people_on_job_id"
   end
 
   create_table "invites", force: :cascade do |t|
@@ -80,5 +80,13 @@ ActiveRecord::Schema.define(version: 2019_01_19_192706) do
     t.datetime "invited_at"
   end
 
+  create_table "jobs", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "invite_people", "invites", on_delete: :cascade
+  add_foreign_key "invite_people", "jobs", on_delete: :nullify
 end
