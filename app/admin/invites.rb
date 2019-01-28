@@ -16,6 +16,8 @@ ActiveAdmin.register Invite do
   filter :people_job_title_cont, label: 'Job Title'
 
   scope :all, default: true
+  scope(:pending) { |scope| scope.where(invited_at: nil) }
+  scope(:invited) { |scope| scope.where.not(invited_at: nil) }
   scope(:reception) { |scope| scope.where(reception: true) }
   scope(:ask_food) { |scope| scope.where(ask_food: true) }
   scope(:received) { |scope| scope.where(rsvp: true) }
@@ -77,7 +79,6 @@ ActiveAdmin.register Invite do
             end
           end
         end
-
         panel 'Invite Details' do
           attributes_table_for invite do
             row :food_type

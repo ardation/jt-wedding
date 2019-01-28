@@ -91,7 +91,6 @@ h1, h2, h3, h4, h5, .text-heading {
 }
 .navbar {
   border-radius: 5px;
-  height: 56px;
   font-size: 1rem;
   &.bg-dark {
     background-color: $color-navy !important;
@@ -105,7 +104,7 @@ h1, h2, h3, h4, h5, .text-heading {
   }
 }
 .padding-navbar-top {
-  padding-top: 75px;
+  padding-top: 80px;
 }
 #invite_code {
   font-family: 'Courier New', Courier, monospace;
