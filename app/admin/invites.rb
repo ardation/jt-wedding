@@ -159,4 +159,10 @@ ActiveAdmin.register Invite do
 
     redirect_to collection_path, notice: 'Toggled Ask Food!'
   end
+
+  controller do
+    def apply_filtering(chain)
+      super(chain).distinct
+    end
+  end
 end
