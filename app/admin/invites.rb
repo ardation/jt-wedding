@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Invite do
-
+  batch_action :destroy, false
   permit_params :reception, :ask_food, :rsvp, :food_type, :phone, :style, :email_address,
                 :street, :suburb, :city, :postal_code, :country,
                 people_attributes: %i[primary first_name last_name gender age coming job_title job_url _destroy id]
@@ -17,7 +17,7 @@ ActiveAdmin.register Invite do
 
   scope :all, default: true
   scope(:received) { |scope| scope.where(invited_at: nil) }
-  scope(:invited) { |scope| scope.where.not(invited_at: nil, rsvp: false) }
+  scope(:sent) { |scope| scope.where(rsvp: false).where.not(invited_at: nil) }
   scope(:responded) { |scope| scope.where(rsvp: true) }
   scope(:reception) { |scope| scope.where(reception: true) }
   scope(:ask_food) { |scope| scope.where(ask_food: true) }
@@ -26,8 +26,13 @@ ActiveAdmin.register Invite do
     selectable_column
     id_column
     column :admin_name
-    column :code
+    column(:code) do |invite|
+      link_to invite.code, invite.invite_url, target: '_blank'
+    end
     column :rsvp
+    column :reception
+    column :ask_food
+    column :invited_at
     column :created_at
     actions
   end
@@ -142,5 +147,17 @@ ActiveAdmin.register Invite do
     end
 
     redirect_to collection_path, notice: 'Invites sent!'
+  end
+
+  batch_action :toggle_reception do |ids|
+    batch_action_collection.where(id: ids).update_all('reception = NOT reception')
+
+    redirect_to collection_path, notice: 'Toggled Reception!'
+  end
+
+  batch_action :toggle_ask_food do |ids|
+    batch_action_collection.where(id: ids).update_all('ask_food = NOT ask_food')
+
+    redirect_to collection_path, notice: 'Toggled Ask Food!'
   end
 end
