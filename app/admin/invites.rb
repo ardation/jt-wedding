@@ -13,7 +13,7 @@ ActiveAdmin.register Invite do
   filter :email_address
   filter :style, as: :check_boxes, collection: Invite.styles
   filter :food_type, as: :select, collection: Invite.food_types
-  filter :people_job_id, as: :select, collection: Job.pluck(:title, :id), label: 'Job'
+  filter :people_job_id, as: :select, collection: proc { Job.pluck(:title, :id) }, label: 'Job'
 
   scope :all, default: true
   scope(:received) { |scope| scope.where(invited_at: nil) }
