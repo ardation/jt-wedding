@@ -1,7 +1,7 @@
 <%= simple_form_for @invite, url: invite_path do |f| %>
-  <div class="card-deck mb-2">
+  <div class="card-deck mb-2 d-block d-md-flex">
     <%= f.simple_fields_for :people do |p| %>
-    <div class="card">
+    <div class="card mb-2 mb-md-0">
       <div class="card-body text-center">
         <h2 class="card-title"><%= p.object.first_name.capitalize %> <%= p.object.last_name.capitalize %></h2>
         <div class="card-text">
@@ -61,7 +61,7 @@
         <div class="btn-group-toggle" data-toggle="buttons">
           <div class="row">
             <% Invite.food_types.each do |key, value| %>
-            <div class="col text-center">
+            <div class="col-12 col-md mb-3 mb-md-0 text-center">
               <div class="btn btn-block <%= 'active' if f.object.food_type == value %>" role="button">
                 <%= f.radio_button :food_type, value %>
                 <%= value.titleize %>
@@ -77,6 +77,6 @@
     </div>
   <% end %>
   <div class="actions my-3">
-    <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send My RSVP', data: { disable_with: invite.rsvp? ? 'Update RSVP' : 'Send My RSVP' }  %>
+    <%= f.submit class: 'btn btn-primary d-block d-md-inline-block w-100 w-md-auto', value: invite.rsvp? ? 'Update RSVP' : 'Send My RSVP', data: { disable_with: invite.rsvp? ? 'Update RSVP' : 'Send My RSVP' }  %>
   </div>
 <% end %>

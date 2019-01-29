@@ -42,12 +42,12 @@
           <%= render 'person_fields', f: person %>
         <% end %>
         <div class="links">
-          <%= link_to_add_association 'Add Family Member', f, :people, class: 'btn btn-secondary' %>
+          <%= link_to_add_association 'Add Family Member', f, :people, class: 'btn btn-secondary d-block d-md-inline-block w-100 w-md-auto' %>
         </div>
       </div>
     </div>
   </div>
   <div class="actions my-3">
-    <%= f.submit class: 'btn btn-primary', value: 'Send Me an Invite', data: { disable_with: 'Send Me an Invite' } %>
+    <%= f.submit class: 'btn btn-primary d-block d-md-inline-block w-100 w-md-auto', value: 'Send Me an Invite', data: { disable_with: 'Send Me an Invite' } %>
   </div>
 <% end %>
