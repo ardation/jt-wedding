@@ -100,7 +100,7 @@ ActiveAdmin.register Invite do
             row :rsvp
             row :reception do |invite|
               status_tag(invite.reception?)
-              link_to 'Toggle reception', toggle_reception_admin_invite_path, method: :put, style: 'float: right'
+              link_to 'Toggle Reception', toggle_reception_admin_invite_path, method: :put, style: 'float: right'
             end
             row :ask_food do |invite|
               status_tag(invite.ask_food?)
