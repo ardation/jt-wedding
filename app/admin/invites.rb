@@ -66,7 +66,6 @@ ActiveAdmin.register Invite do
             column :coming
             column :coming_reception
             column :job_title
-            column :job_url
             column(:actions) do |person|
               link_to 'Make Primary', make_primary_admin_invite_path(person_id: person.id), method: :put
             end
