@@ -4,7 +4,9 @@ ActiveAdmin.register Invite do
   batch_action :destroy, false
   permit_params :reception, :ask_food, :rsvp, :food_type, :phone, :style, :email_address,
                 :street, :suburb, :city, :postal_code, :country,
-                people_attributes: %i[primary first_name last_name gender age coming job_id _destroy id]
+                people_attributes: %i[
+                  primary first_name last_name gender age coming coming_reception job_id _destroy id
+                ]
   decorate_with InviteDecorator
 
   filter :people_first_name_cont, label: 'First Name'
@@ -62,6 +64,7 @@ ActiveAdmin.register Invite do
             column :age
             column :primary
             column :coming
+            column :coming_reception
             column :job_title
             column :job_url
             column(:actions) do |person|
@@ -110,7 +113,7 @@ ActiveAdmin.register Invite do
       f.input :rsvp
       f.input :food_type, collection: Invite.food_types, as: :radio
       f.input :phone
-      f.input :style
+      f.input :style, collection: Invite.styles, as: :radio
       f.input :email_address
       f.input :street
       f.input :suburb
@@ -126,6 +129,7 @@ ActiveAdmin.register Invite do
         p.input :gender, collection: Invite::Person.genders, as: :radio
         p.input :age, collection: Invite::Person.ages, as: :radio
         p.input :coming
+        p.input :coming_reception
         p.input :job
       end
     end

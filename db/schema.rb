@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_001332) do
+ActiveRecord::Schema.define(version: 2019_01_29_032535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_01_29_001332) do
     t.datetime "updated_at", null: false
     t.string "age"
     t.bigint "job_id"
+    t.boolean "coming_reception", default: true
     t.index ["invite_id"], name: "index_invite_people_on_invite_id"
     t.index ["job_id"], name: "index_invite_people_on_job_id"
   end

@@ -66,6 +66,6 @@ class Visitors::InvitesController < VisitorsController
   def invite_update_params
     return {} unless params[:invite]
 
-    params.require(:invite).permit(:food_type, people_attributes: %i[id coming])
+    params.require(:invite).permit(:food_type, people_attributes: %i[id coming coming_reception])
   end
 end
