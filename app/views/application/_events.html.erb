@@ -1,4 +1,4 @@
-<div class="card-deck">
+<div class="card-group">
   <div class="card">
     <div class="card-img-top card-img-icon ceremony">
       <i class="fal fa-church"></i>
@@ -38,9 +38,11 @@
       <a class="btn btn-secondary btn-block" target="_blank" href="https://www.google.com/maps/place/Grand+Park+Chinese+Seafood+Restaurant/@-36.8923332,174.7739165,17z/data=!3m1!4b1!4m5!3m4!1s0x6d0d4882ce0bfc5b:0xa5406d5e11373b0a!8m2!3d-36.8923332!4d174.7761052">
         Open on Google Maps
       </a>
+      <% if invite.people.where(age: 'child').exists? %>
       <div class="mt-2">
-        <small class="text-muted">Due to limited capacity we are not able to seat children under 10.</small>
+        <small class="text-muted">Due to limited capacity we are not able to seat children under 10 years of age.</small>
       </div>
+      <% end %>
     </div>
   </div>
   <% end %>
@@ -61,3 +63,19 @@
     </div>
   </div>
 </div>
+<% if invite.people.where.not(job_id: nil).exists? %>
+  <div class="card-group mt-2">
+    <% invite.people.where.not(job_id: nil).each do |person| %>
+      <div class="card">
+        <div class="card-body text-center">
+          <h1><%= person.first_name %></h1>
+          <p>
+          Thanks for helping us by agreeing to be <%= indefinite_articlerize(person.job_title).downcase %>!<br>
+          <small>Please be sure to read over your job description by clicking the link below.</small>
+          </p>
+          <%= link_to 'Job Description', person.job_url, class: 'btn btn-outline-primary btn-block', target: '_blank' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

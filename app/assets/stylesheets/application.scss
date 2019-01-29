@@ -80,6 +80,10 @@ h1, h2, h3, h4, h5, .text-heading {
     }
     .content {
       margin: auto;
+      .display-2 {
+        font-size: 4.0rem;
+        line-height: 60px;
+      }
     }
     .footer {
       display: flex;
