@@ -64,8 +64,12 @@ ActiveAdmin.register Invite do
             column :last_name
             column :age
             column :primary
-            column :coming
-            column :coming_reception
+            column(:coming) do |person|
+              status_tag(person.invite.rsvp? && person.coming?)
+            end
+            column(:coming_reception) do |person|
+              status_tag(person.invite.rsvp? && person.coming_reception?)
+            end
             column :job
             column(:actions) do |person|
               link_to 'Make Primary', make_primary_admin_invite_path(person_id: person.id), method: :put
@@ -93,9 +97,16 @@ ActiveAdmin.register Invite do
         end
         panel 'Invite Details' do
           attributes_table_for invite do
-            row :food_type if invite.ask_food?
-            row :reception
             row :rsvp
+            row :reception do |invite|
+              status_tag(invite.reception?)
+              link_to 'Toggle reception', toggle_reception_admin_invite_path, method: :put, style: 'float: right'
+            end
+            row :ask_food do |invite|
+              status_tag(invite.ask_food?)
+              link_to 'Toggle Ask Food', toggle_ask_food_admin_invite_path, method: :put, style: 'float: right'
+            end
+            row :food_type if invite.ask_food?
             row :code do |invite|
               link_to invite.code, invite.invite_url, target: '_blank'
             end
@@ -145,6 +156,16 @@ ActiveAdmin.register Invite do
   member_action :send_invite, method: :put do
     resource.send_invite
     redirect_to resource_path, notice: 'Invite sent!'
+  end
+
+  member_action :toggle_reception, method: :put do
+    resource.update(reception: !resource.reception)
+    redirect_to resource_path, notice: 'Reception toggled!'
+  end
+
+  member_action :toggle_ask_food, method: :put do
+    resource.update(ask_food: !resource.ask_food)
+    redirect_to resource_path, notice: 'Ask Food toggled!'
   end
 
   member_action :make_primary, method: :put do
