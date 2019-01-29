@@ -25,7 +25,6 @@ form fieldset.actions ol {
   text-align: right;
   li:last-child {
     margin-right: 0;
-
   }
 }
 form.active_admin_comment textarea {
@@ -33,4 +32,10 @@ form.active_admin_comment textarea {
 }
 a.button, a:link.button, a:visited.button, a.clear_filters_btn, .cancel a, input[type='submit'], input[type='button'], button {
   text-transform: uppercase;
+}
+.panel_contents th {
+  padding-right: 10px;
+}
+form.filter_form .buttons {
+  text-align: right;
 }
