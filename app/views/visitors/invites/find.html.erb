@@ -2,6 +2,6 @@
   <h3 class="display-3 mt-3 mb-4">Enter Your Invite Code</h3>
   <%= simple_form_for Invite.new, url: find_invite_path do |f| %>
     <%= f.input :code, label: false, input_html: { maxlength: 5, autofocus: true, class: 'mx-auto', placeholder: '-----' } %>
-    <%= f.submit class: 'btn btn-primary', value: 'Find My Invite', data: { disable_with: 'Find My Invite' } %>
+    <%= f.submit class: 'btn btn-primary d-block d-md-inline-block w-100 w-md-auto', value: 'Find My Invite', data: { disable_with: 'Find My Invite' } %>
   <% end %>
 </div>
