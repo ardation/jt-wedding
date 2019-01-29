@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     end
   end
   delete 'sign_out', to: 'visitors#reset'
+  get 'what_is_marriage', to: 'visitors#what_is_marriage'
   root to: 'visitors#index'
 end

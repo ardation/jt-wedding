@@ -8,22 +8,27 @@
           <%= p.label :coming, "Will #{p.object.primary? ? 'you' : p.object.first_name.capitalize} be able to attend?" %>
           <div class="form-group mb-0">
             <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
-              <div class="btn btn-block <%= 'active' if p.object.coming? %>" role="button">
-                <%= p.radio_button :coming, 'true' %>
-                Yes
-              </div>
               <div class="btn btn-block <%= 'active' unless p.object.coming? %>" role="button">
                 <%= p.radio_button :coming, 'false' %>
                 No
               </div>
+              <div class="btn btn-block <%= 'active' if p.object.coming? %>" role="button">
+                <%= p.radio_button :coming, 'true' %>
+                Yes
+              </div>
             </div>
           </div>
+          <% if f.object.reception? && p.object.child? %>
+            <div class="mt-3">
+              <small class="text-muted">Due to limited capacity we are not able to seat children under 10 at the reception.</small>
+            </div>
+          <% end%>
           <% if p.object.job_title.present? %>
           <p class="mt-3">
             Thanks for helping us by agreeing to be <%= indefinite_articlerize(p.object.job_title).downcase %>!<br>
             <small>Please be sure to read over your job description by clicking the link below.</small>
           </p>
-          <%= link_to 'Job Description', p.object.job_url, class: 'btn btn-primary btn-block', target: '_blank' %>
+          <%= link_to 'Job Description', p.object.job_url, class: 'btn btn-outline-primary btn-block', target: '_blank' %>
           <% end %>
         </div>
       </div>
@@ -57,6 +62,6 @@
     </div>
   <% end %>
   <div class="actions my-3">
-    <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send RSVP', data: { disable_with: invite.rsvp? ? 'Update RSVP' : 'Send RSVP' }  %>
+    <%= f.submit class: 'btn btn-primary', value: invite.rsvp? ? 'Update RSVP' : 'Send My RSVP', data: { disable_with: invite.rsvp? ? 'Update RSVP' : 'Send My RSVP' }  %>
   </div>
 <% end %>

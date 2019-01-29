@@ -8,6 +8,8 @@ class VisitorsController < ApplicationController
 
   def index; end
 
+  def what_is_marriage; end
+
   def reset
     reset_session
     redirect_to root_path

@@ -15,6 +15,9 @@
           <li class="nav-item <%= 'active' if current_page?(edit_invite_path) %>">
             <%= link_to 'RSVP', edit_invite_path, class: 'nav-link' %>
           </li>
+          <li class="nav-item <%= 'active' if current_page?(what_is_marriage_path) %>">
+            <%= link_to 'What is Marriage?', what_is_marriage_path, class: 'nav-link' %>
+          </li>
           <li class="nav-item">
             <%= link_to 'Sign Out', sign_out_path, method: :delete, class: 'nav-link' %>
           </li>

@@ -60,10 +60,13 @@ ActiveAdmin.register Invite do
             column :first_name
             column :last_name
             column :age
-            column :coming
             column :primary
+            column :coming
             column :job_title
             column :job_url
+            column(:actions) do |person|
+              link_to 'Make Primary', make_primary_admin_invite_path(person_id: person.id), method: :put
+            end
           end
         end
         active_admin_comments
@@ -86,7 +89,7 @@ ActiveAdmin.register Invite do
         end
         panel 'Invite Details' do
           attributes_table_for invite do
-            row :food_type
+            row :food_type if invite.ask_food?
             row :reception
             row :rsvp
             row :code do |invite|
@@ -136,6 +139,14 @@ ActiveAdmin.register Invite do
   member_action :send_invite, method: :put do
     resource.send_invite
     redirect_to resource_path, notice: 'Invite sent!'
+  end
+
+  member_action :make_primary, method: :put do
+    return unless params[:person_id]
+
+    resource.people.where.not(id: params[:person_id]).update(primary: false)
+    resource.people.find(params[:person_id]).update(primary: true)
+    redirect_to resource_path, notice: 'Person made primary!'
   end
 
   batch_action :send_invite do |ids|
