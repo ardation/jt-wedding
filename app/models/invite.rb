@@ -13,6 +13,7 @@ class Invite < ApplicationRecord
   validates :email_address, presence: true, if: :email?
   validates :street, :suburb, :city, :country, presence: true, if: :physical?
   after_commit :set_primary_person, on: :create
+  belongs_to :admin_user, required: false
 
   def send_invite
     send_email_invite

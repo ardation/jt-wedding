@@ -5,7 +5,7 @@ ActiveAdmin.register Invite do
   permit_params :reception, :ask_food, :rsvp, :food_type, :phone, :style, :email_address,
                 :street, :suburb, :city, :postal_code, :country,
                 people_attributes: %i[
-                  primary first_name last_name gender age coming coming_reception job_id _destroy id
+                  primary first_name last_name gender age coming coming_reception job_id admin_user_id _destroy id
                 ]
   decorate_with InviteDecorator
 
@@ -16,6 +16,7 @@ ActiveAdmin.register Invite do
   filter :style, as: :check_boxes, collection: Invite.styles
   filter :food_type, as: :select, collection: Invite.food_types
   filter :people_job_id, as: :select, collection: proc { Job.pluck(:title, :id) }, label: 'Job'
+  filter :admin_user_id, as: :select, collection: proc { AdminUser.pluck(:email, :id) }, label: 'User'
 
   scope :all, default: true
   scope(:received) { |scope| scope.where(invited_at: nil) }
@@ -35,7 +36,7 @@ ActiveAdmin.register Invite do
     column :reception
     column :ask_food
     column :invited_at
-    column :created_at
+    column :admin_user
     actions
   end
 
@@ -65,7 +66,7 @@ ActiveAdmin.register Invite do
             column :primary
             column :coming
             column :coming_reception
-            column :job_title
+            column :job
             column(:actions) do |person|
               link_to 'Make Primary', make_primary_admin_invite_path(person_id: person.id), method: :put
             end
@@ -76,6 +77,7 @@ ActiveAdmin.register Invite do
       column span: 6 do
         panel 'Contact Details' do
           attributes_table_for invite do
+            row :admin_user
             row :phone
             row :style
             if invite.email?
@@ -107,6 +109,7 @@ ActiveAdmin.register Invite do
   form do |f|
     f.semantic_errors(*f.object.errors.keys)
     f.inputs 'Details' do
+      f.input :admin_user, collection: AdminUser.pluck(:email, :id), as: :select
       f.input :reception
       f.input :ask_food
       f.input :rsvp
@@ -172,6 +175,12 @@ ActiveAdmin.register Invite do
     batch_action_collection.where(id: ids).update_all('ask_food = NOT ask_food')
 
     redirect_to collection_path, notice: 'Toggled Ask Food!'
+  end
+
+  batch_action :assign_to_me do |ids|
+    batch_action_collection.where(id: ids).update_all(admin_user_id: current_admin_user.id)
+
+    redirect_to collection_path, notice: 'Assigned invites to you!'
   end
 
   controller do
