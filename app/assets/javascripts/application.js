@@ -26,4 +26,10 @@ $(document).on('turbolinks:load', function() {
     classActive: 'btn-secondary',
     classInactive: 'btn-outline-secondary'
   });
+
+  $('.list-group a.list-group-item').click(function(event) {
+      event.preventDefault();
+      $($(this).attr('href'))[0].scrollIntoView();
+      scrollBy(0, -99);
+  });
 });
