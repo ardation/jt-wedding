@@ -24,6 +24,7 @@ ActiveAdmin.register Invite do
   scope(:responded) { |scope| scope.where(rsvp: true) }
   scope(:reception) { |scope| scope.where(reception: true) }
   scope(:ask_food) { |scope| scope.where(ask_food: true) }
+  scope(:unassigned) { |scope| scope.where(admin_user_id: nil) }
 
   index do
     selectable_column
