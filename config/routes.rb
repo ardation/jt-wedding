@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'visitors#reset'
   get 'what_is_marriage', to: 'visitors#what_is_marriage'
   root to: 'visitors#index'
+  get ':code', to: 'invites#find', as: 'root_find_with_code'
 end
