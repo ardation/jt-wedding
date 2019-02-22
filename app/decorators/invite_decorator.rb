@@ -5,6 +5,10 @@ class InviteDecorator < ApplicationDecorator
     first_names
   end
 
+  def short_name
+    "#{first_names} #{single_family_name}".strip
+  end
+
   def admin_name
     "#{first_names} #{last_names}".strip
   end
@@ -61,6 +65,11 @@ class InviteDecorator < ApplicationDecorator
 
   def last_names
     object.people.order(primary: :desc).pluck(:last_name).map(&:strip).map(&:capitalize).uniq.to_sentence
+  end
+
+  def single_family_name
+    last_names = object.people.order(primary: :desc).pluck(:last_name)
+    last_names.map(&:strip).map(&:capitalize).uniq.to_sentence if last_names.length == 1
   end
 
   def default_url_options
