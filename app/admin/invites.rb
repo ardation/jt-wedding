@@ -43,7 +43,7 @@ ActiveAdmin.register Invite do
 
   csv do
     column :id
-    column :admin_name
+    column :name
     column :style
     column :code
     column :phone
