@@ -76,8 +76,8 @@ class InviteDecorator < ApplicationDecorator
   end
 
   def single_family_name
-    last_names = object.people.order(primary: :desc).pluck(:last_name)
-    last_names.map(&:strip).map(&:titleize).uniq.to_sentence if last_names.length == 1
+    last_names = object.people.order(primary: :desc).pluck(:last_name).map(&:strip).map(&:titleize).uniq
+    last_names.length == 1 ? last_names.first : nil
   end
 
   def default_url_options
