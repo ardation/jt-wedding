@@ -17,6 +17,7 @@ ActiveAdmin.register Invite do
   filter :food_type, as: :select, collection: Invite.food_types
   filter :people_job_id, as: :select, collection: proc { Job.pluck(:title, :id) }, label: 'Job'
   filter :admin_user_id, as: :select, collection: proc { AdminUser.pluck(:email, :id) }, label: 'User'
+  filter :invited_at_blank, as: :boolean
 
   scope :all, default: true
   scope(:received) { |scope| scope.where(invited_at: nil) }
