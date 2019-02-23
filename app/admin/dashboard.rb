@@ -15,7 +15,9 @@ ActiveAdmin.register_page 'Dashboard' do
     AdminUser.find_each do |user|
       panel user.email do
         reception = Invite.joins(:people)
-                          .where(admin_user: user, invite_people: { age: 'adult', coming_reception: true })
+                          .where(admin_user: user,
+                                 reception: true,
+                                 invite_people: { age: 'adult', coming_reception: true })
                           .count
         h2 "#{pluralize(reception, 'person')} invited to the reception"
       end
