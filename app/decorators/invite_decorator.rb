@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 class InviteDecorator < ApplicationDecorator
+  def first_names
+    object.people.order(primary: :desc).pluck(:first_name).map(&:strip).map(&:titleize).to_sentence
+  end
+
+  def last_names
+    object.people.order(primary: :desc).pluck(:last_name).map(&:strip).map(&:titleize).uniq.to_sentence
+  end
+
   def name
     first_names
   end
@@ -11,6 +19,14 @@ class InviteDecorator < ApplicationDecorator
 
   def admin_name
     "#{first_names} #{last_names}".strip
+  end
+
+  def adult_first_names
+    object.people.where(age: 'adult').order(primary: :desc).pluck(:first_name).map(&:strip).map(&:titleize).to_sentence
+  end
+
+  def child_first_names
+    object.people.where(age: 'child').order(primary: :desc).pluck(:first_name).map(&:strip).map(&:titleize).to_sentence
   end
 
   def invite_url
@@ -59,17 +75,9 @@ class InviteDecorator < ApplicationDecorator
     object.people.order(primary: :desc).first
   end
 
-  def first_names
-    object.people.order(primary: :desc).pluck(:first_name).map(&:strip).map(&:capitalize).to_sentence
-  end
-
-  def last_names
-    object.people.order(primary: :desc).pluck(:last_name).map(&:strip).map(&:capitalize).uniq.to_sentence
-  end
-
   def single_family_name
     last_names = object.people.order(primary: :desc).pluck(:last_name)
-    last_names.map(&:strip).map(&:capitalize).uniq.to_sentence if last_names.length == 1
+    last_names.map(&:strip).map(&:titleize).uniq.to_sentence if last_names.length == 1
   end
 
   def default_url_options

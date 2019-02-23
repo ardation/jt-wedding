@@ -29,13 +29,14 @@ ActiveAdmin.register Invite do
   index do
     selectable_column
     id_column
-    column :admin_name
+    column :adult_first_names
+    column :child_first_names
+    column :last_names
     column(:code) do |invite|
       link_to invite.code, invite.invite_url, target: '_blank'
     end
     column :rsvp
     column :reception
-    column :ask_food
     column :invited_at
     column :admin_user
     actions
