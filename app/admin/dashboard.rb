@@ -11,5 +11,14 @@ ActiveAdmin.register_page 'Dashboard' do
       h2 "#{pluralize sent.count, 'invite'} sent for #{pluralize sent.joins(:people).count, 'person'}"
       h2 "#{pluralize responded.count, 'invite'} responded for #{pluralize responded.joins(:people).count, 'person'}"
     end
+
+    AdminUser.find_each do |user|
+      panel user.email do
+        reception = Invite.joins(:people)
+                          .where(admin_user: user, invite_people: { age: 'adult', coming_reception: true })
+                          .count
+        h2 "#{pluralize(reception, 'person')} invited to the reception"
+      end
+    end
   end
 end

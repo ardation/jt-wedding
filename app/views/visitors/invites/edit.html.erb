@@ -18,7 +18,7 @@
               </div>
             </div>
           </div>
-          <% if f.object.reception %>
+          <% if f.object.reception? && p.object.adult? %>
             <%= p.label :coming_reception, "Will #{p.object.primary? ? 'you' : p.object.first_name.capitalize} be able to attend the reception?", class: 'mt-3' %>
             <div class="form-group mb-0">
               <div class="btn-group btn-block btn-group-toggle" data-toggle="buttons">
@@ -35,7 +35,7 @@
           <% end %>
           <% if f.object.reception? && p.object.child? %>
             <div class="mt-3">
-              <small class="text-muted">Due to limited capacity we are not able to seat children under 10 at the reception.</small>
+              <small>Due to limited capacity we are not able to seat young children at the reception. Please make babysitting arrangements for your child.</small>
             </div>
           <% end%>
           <% if p.object.job.present? %>
