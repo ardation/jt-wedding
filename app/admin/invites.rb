@@ -18,6 +18,8 @@ ActiveAdmin.register Invite do
   filter :people_job_id, as: :select, collection: proc { Job.pluck(:title, :id) }, label: 'Job'
   filter :admin_user_id, as: :select, collection: proc { AdminUser.pluck(:email, :id) }, label: 'User'
   filter :invited_at_blank, as: :boolean
+  filter :rsvp
+  filter :reception
 
   scope :all, default: true
   scope(:received) { |scope| scope.where(invited_at: nil) }

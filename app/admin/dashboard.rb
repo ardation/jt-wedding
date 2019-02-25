@@ -16,10 +16,25 @@ ActiveAdmin.register_page 'Dashboard' do
       panel user.email do
         reception = Invite.joins(:people)
                           .where(admin_user: user,
+                                 rsvp: false,
                                  reception: true,
                                  invite_people: { age: 'adult', coming_reception: true })
                           .count
+        yes_reception = Invite.joins(:people)
+                              .where(admin_user: user,
+                                     reception: true,
+                                     rsvp: true,
+                                     invite_people: { age: 'adult', coming_reception: true })
+                              .count
+        no_reception = Invite.joins(:people)
+                             .where(admin_user: user,
+                                    reception: true,
+                                    rsvp: true,
+                                    invite_people: { age: 'adult', coming_reception: false })
+                             .count
         h2 "#{pluralize(reception, 'person')} invited to the reception"
+        h2 "#{pluralize(yes_reception, 'person')} attending reception"
+        h2 "#{pluralize(no_reception, 'person')} not attending reception"
       end
     end
   end
