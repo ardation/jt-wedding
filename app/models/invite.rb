@@ -33,7 +33,7 @@ class Invite < ApplicationRecord
     SmsGatewayMeService.send_message(
       phone,
       "Hey #{primary_person.first_name.strip.capitalize}, Jeanny & Tataihono here. Your invite to our wedding "\
-      "is on the way! Meanwhile you can RSVP by going to this link: #{decorate.invite_url}."
+      "is on the way! Meanwhile you can RSVP by going to this link: #{decorate.invite_url}"
     )
   end
 
