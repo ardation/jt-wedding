@@ -29,10 +29,6 @@ gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
-group :production do
-  gem 'mailgun-ruby', '~>1.1.6'
-end
-
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'dotenv-rails'
