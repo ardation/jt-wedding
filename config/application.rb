@@ -20,4 +20,6 @@ class JtWedding::Application < Rails::Application
   # the framework and any gems in your application.
 
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+  config.time_zone = 'Auckland'
 end
