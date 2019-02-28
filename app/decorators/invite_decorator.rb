@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class InviteDecorator < ApplicationDecorator
+  include Rails.application.routes.url_helpers
+
   def first_names
     object.people.order(primary: :desc).pluck(:first_name).map(&:strip).map(&:titleize).to_sentence
   end
@@ -30,7 +32,7 @@ class InviteDecorator < ApplicationDecorator
   end
 
   def invite_url
-    h.find_with_code_invite_url(default_url_options.merge(code: code))
+    root_find_with_code_url(default_url_options.merge(code: code))
   end
 
   def ceremony_ical(cal = Icalendar::Calendar.new)
