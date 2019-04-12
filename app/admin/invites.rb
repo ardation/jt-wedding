@@ -57,6 +57,7 @@ ActiveAdmin.register Invite do
     column :city
     column :postal_code
     column :country
+    column :food_type
     column :created_at
   end
 
