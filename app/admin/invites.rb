@@ -14,8 +14,8 @@ ActiveAdmin.register Invite do
   filter :phone
   filter :email_address
   filter :email_address_blank, as: :boolean
-  filter :style, as: :check_boxes, collection: Invite.styles
-  filter :food_type, as: :select, collection: Invite.food_types, multiple: true
+  filter :style, as: :select, collection: Invite.styles, multiple: true, input_html: { size: 2 }
+  filter :food_type, as: :select, collection: Invite.food_types, multiple: true, input_html: { size: 5 }
   filter :people_job_id, as: :select, collection: proc { Job.pluck(:title, :id) }, label: 'Job'
   filter :admin_user_id, as: :select, collection: proc { AdminUser.pluck(:email, :id) }, label: 'User'
   filter :invited_at_blank, as: :boolean
