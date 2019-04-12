@@ -13,8 +13,9 @@ ActiveAdmin.register Invite do
   filter :people_last_name_cont, label: 'Last Name'
   filter :phone
   filter :email_address
+  filter :email_address_blank, as: :boolean
   filter :style, as: :check_boxes, collection: Invite.styles
-  filter :food_type, as: :select, collection: Invite.food_types
+  filter :food_type, as: :select, collection: Invite.food_types, multiple: true
   filter :people_job_id, as: :select, collection: proc { Job.pluck(:title, :id) }, label: 'Job'
   filter :admin_user_id, as: :select, collection: proc { AdminUser.pluck(:email, :id) }, label: 'User'
   filter :invited_at_blank, as: :boolean
