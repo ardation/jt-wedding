@@ -38,8 +38,6 @@ class Invite < ApplicationRecord
   end
 
   def send_sms_notification
-    return if rsvp?
-
     SmsGatewayMeService.send_message(
       phone,
       "Hey #{primary_person.first_name.strip.capitalize}, Jeanny & Tataihono here. We are excited to see you at "\
